@@ -76,6 +76,10 @@ async function run(): Promise<void> {
 
   const octokit = github.getOctokit(githubToken)
 
+  core.info(context.owner)
+  core.info(context.repo)
+  core.info(context.sha)
+
   await octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
     owner: context.owner,
     repo: context.repo,
