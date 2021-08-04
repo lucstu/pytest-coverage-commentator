@@ -9,5 +9,5 @@ jobs:
       - name: Run Action
         uses: ./
         with:
-          file: './pytest-coverage.txt'
+          pytest-coverage: './pytest-coverage.txt'
           token: ${{secrets.GITHUB_TOKEN}}
