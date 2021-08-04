@@ -73,7 +73,6 @@ async function run(): Promise<void> {
   const message = createMessage(pytestFileName)
 
   const context = github.context
-  const pullRequestNumber = context.payload.pull_request?.number
 
   const octokit = github.getOctokit(githubToken)
 
