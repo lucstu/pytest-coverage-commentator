@@ -76,15 +76,21 @@ function run() {
     var _a;
     return __awaiter(this, void 0, void 0, function* () {
       const githubToken = core.getInput('token')
-    const pytestFileName = core.getInput('pytest-coverage')
+      const pytestFileName = core.getInput('pytest-coverage')
 
-    const message = createMessage(pytestFileName)
+      const message = createMessage(pytestFileName)
 
-    const context = github.context
+      const context = github.context
+      const pullRequestNumber = context.payload.pull_request?.number
 
-    const octokit = github.getOctokit(githubToken)
+      const octokit = github.getOctokit(githubToken)
 
-    octokit.create_commit_comment(context.repo, context.sha, message)
+      await octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
+        owner: context.owner,
+        repo: context.repo,
+        commit_sha: context.sha,
+        body: message
+      })
     });
 }
 // eslint-disable-next-line github/no-then

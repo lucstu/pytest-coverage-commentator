@@ -77,7 +77,12 @@ async function run(): Promise<void> {
 
   const octokit = github.getOctokit(githubToken)
 
-  octokit.create_commit_comment(context.repo, context.sha, message)
+  await octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
+    owner: context.owner,
+    repo: context.repo,
+    commit_sha: context.sha,
+    body: message
+  })
 
   // Now decide if we should issue a new comment or edit an old one
   // const {data: comments} = await octokit.issues.listComments({
