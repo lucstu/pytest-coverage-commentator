@@ -84,7 +84,7 @@ function run() {
 
       const octokit = github.getOctokit(githubToken)
 
-      await octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
+      yield octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
         owner: context.owner,
         repo: context.repo,
         commit_sha: context.sha,
