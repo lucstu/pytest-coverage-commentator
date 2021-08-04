@@ -89,7 +89,7 @@ function run() {
       core.info(context.sha)
 
       yield octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
-        owner: context.owner,
+        owner: 'lucstu',
         repo: context.repo,
         commit_sha: context.sha,
         body: message
