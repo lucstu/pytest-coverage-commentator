@@ -80,6 +80,13 @@ async function run(): Promise<void> {
   core.info(context.repo)
   core.info(context.sha)
 
+  await octokit.rest.repos.createCommitComment({
+    owner: 'lucstu',
+    repo: 'pytest-coverage-commentator',
+    commit_sha: context.sha,
+    body: message
+  })
+
   await octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
     owner: 'lucstu',
     repo: context.repo,
