@@ -88,7 +88,7 @@ function run() {
       core.info(context.repo)
       core.info(context.sha)
 
-      yield octokit.rest.repos.createCommitComment({
+      yield octokit.request('POST /repos/{owner}/{repo}/commits/{commit_sha}/comments', {
         owner: 'lucstu',
         repo: 'pytest-coverage-commentator',
         commit_sha: context.sha,
